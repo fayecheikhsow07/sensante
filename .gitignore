@@ -20,3 +20,6 @@ Thumps.db
 
 .vscode/
 .idea/
+
+# Cles API - NE JAMAIS COMMITER
+.env
