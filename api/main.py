@@ -11,6 +11,9 @@ import os
 from dotenv import load_dotenv
 from groq import Groq
 
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
 # Charger les variables d'environnement
 load_dotenv()
 
@@ -188,3 +191,9 @@ def explain(data: ExplainInput):
         explication = f"Erreur lors de l'appel au LLM : {str(e)}"
 
     return ExplainOutput(explication=explication)
+
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+@app.get("/")
+def serve_frontend():
+    return FileResponse("frontend/index.html")
